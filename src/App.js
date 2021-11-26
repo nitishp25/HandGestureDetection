@@ -1,18 +1,25 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 
 import * as tf from "@tensorflow/tfjs";
 import * as handpose from "@tensorflow-models/handpose";
 import Webcam from "react-webcam";
-import "./App.css";
+import * as fp from 'fingerpose';
+
 import { drawHand } from "./utilities";
+import thumbsup from './images/thumbsup.png';
+import victory from './images/victory.png';
+
+import "./App.css";
 
 function App() {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
 
+  const [emoji, setEmoji] = useState(null);
+  const images = { thumbsup: thumbsup, victory: victory }
+
   const runHandpose = async () => {
     const net = await handpose.load();
-    console.log("Handpose model loaded.");
     setInterval(() => {
       detect(net);
     }, 100);
@@ -35,7 +42,23 @@ function App() {
       canvasRef.current.height = videoHeight;
 
       const hand = await net.estimateHands(video);
-      console.log(hand);
+
+      if(hand.length > 0) {
+        const GE = new fp.GestureEstimator([
+          fp.Gestures.ThumbsUpGesture,
+          fp.Gestures.VictoryGesture,
+        ]);
+
+        const gesture = await GE.estimate(hand[0].landmarks, 4);
+
+        if(gesture.gestures !== undefined && gesture.gestures.length > 0) {
+          const score = gesture.gestures.map((prediction) => prediction.score);
+          const maxScore = score.indexOf(Math.max.apply(null, score));
+
+          setEmoji(gesture.gestures[maxScore].name);
+          console.log(emoji);
+        }
+      }
 
       const ctx = canvasRef.current.getContext("2d");
       drawHand(hand, ctx);
@@ -76,6 +99,19 @@ function App() {
             height: 480,
           }}
         />
+
+        {emoji !== null ? <img source={images[emoji]} style={{
+            bottom: 500,
+            height: 100,
+            left: 400,
+            marginLeft: "auto",
+            marginRight: "auto",
+            position: "absolute",
+            right: 0,
+            textAlign: "center"
+          }}/> 
+          : ""  
+        }
       </header>
     </div>
   );
