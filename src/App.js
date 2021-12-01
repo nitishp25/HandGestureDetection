@@ -1,28 +1,30 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from "react";
 
 import * as tf from "@tensorflow/tfjs";
 import * as handpose from "@tensorflow-models/handpose";
 import Webcam from "react-webcam";
-import * as fp from 'fingerpose';
-
-import { drawHand } from "./utilities";
-import thumbsup from './images/thumbsup.png';
-import victory from './images/victory.png';
-
 import "./App.css";
+import { drawHand } from "./utilities";
+
+import * as fp from "fingerpose";
+import victory from "./images/victory.png";
+import thumbs_up from "./images/thumbs_up.png";
+import i_love_you from "./images/i_love_you.png";
+
+import { loveYouGesture } from './custom-gestures/LoveYou.js';
 
 function App() {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
 
   const [emoji, setEmoji] = useState(null);
-  const images = { thumbsup: thumbsup, victory: victory }
+  const images = { thumbs_up: thumbs_up, victory: victory, i_love_you: i_love_you };
 
   const runHandpose = async () => {
     const net = await handpose.load();
     setInterval(() => {
       detect(net);
-    }, 100);
+    }, 10);
   };
 
   const detect = async (net) => {
@@ -43,20 +45,27 @@ function App() {
 
       const hand = await net.estimateHands(video);
 
-      if(hand.length > 0) {
+      if (hand.length > 0) {
         const GE = new fp.GestureEstimator([
-          fp.Gestures.ThumbsUpGesture,
           fp.Gestures.VictoryGesture,
+          fp.Gestures.ThumbsUpGesture,
+          loveYouGesture
         ]);
 
         const gesture = await GE.estimate(hand[0].landmarks, 4);
 
-        if(gesture.gestures !== undefined && gesture.gestures.length > 0) {
-          const score = gesture.gestures.map((prediction) => prediction.score);
-          const maxScore = score.indexOf(Math.max.apply(null, score));
+        if (gesture.gestures !== undefined && gesture.gestures.length > 0) {
+
+          const score = gesture.gestures.map(
+            (prediction) => prediction.score
+          );
+          const maxScore = score.indexOf(
+            Math.max.apply(null, score)
+          );
 
           setEmoji(gesture.gestures[maxScore].name);
-          console.log(emoji);
+
+          console.log(gesture.gestures[maxScore].name);
         }
       }
 
@@ -65,7 +74,7 @@ function App() {
     }
   };
 
-  runHandpose();
+  useEffect(()=>{runHandpose()},[]);
 
   return (
     <div className="App">
@@ -100,18 +109,24 @@ function App() {
           }}
         />
 
-        {emoji !== null ? <img source={images[emoji]} style={{
-            bottom: 500,
-            height: 100,
-            left: 400,
-            marginLeft: "auto",
-            marginRight: "auto",
-            position: "absolute",
-            right: 0,
-            textAlign: "center"
-          }}/> 
-          : ""  
-        }
+        {emoji !== null ? (
+          <img
+            src={images[emoji]}
+            style={{
+              position: "absolute",
+              marginLeft: "auto",
+              marginRight: "auto",
+              left: 400,
+              bottom: 100,
+              right: 0,
+              textAlign: "center",
+              height: 100,
+            }}
+          />
+        ) : (
+          ""
+        )}
+
       </header>
     </div>
   );
