@@ -10,15 +10,30 @@ import * as fp from "fingerpose";
 import victory from "./images/victory.png";
 import thumbs_up from "./images/thumbs_up.png";
 import i_love_you from "./images/i_love_you.png";
+import point_left from "./images/point_left.png";
+import point_right from "./images/point_right.png";
+import okay from "./images/okay.png";
 
 import { loveYouGesture } from './custom-gestures/LoveYou.js';
+import { pointLeftGesture } from './custom-gestures/PointLeft.js';
+import { pointRightGesture } from './custom-gestures/PointRight.js';
+import { okayGesture } from './custom-gestures/Okay.js';
+import { victoryGesture } from "./custom-gestures/Victory.js";
+import { thumbsUpGesture } from "./custom-gestures/ThumbsUp.js";
 
 function App() {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
 
   const [emoji, setEmoji] = useState(null);
-  const images = { thumbs_up: thumbs_up, victory: victory, i_love_you: i_love_you };
+  const images = { 
+    thumbs_up: thumbs_up, 
+    victory: victory, 
+    i_love_you: i_love_you, 
+    point_left: point_left,
+    point_right: point_right,
+    okay: okay 
+  };
 
   const runHandpose = async () => {
     const net = await handpose.load();
@@ -47,9 +62,12 @@ function App() {
 
       if (hand.length > 0) {
         const GE = new fp.GestureEstimator([
-          fp.Gestures.VictoryGesture,
-          fp.Gestures.ThumbsUpGesture,
-          loveYouGesture
+          thumbsUpGesture,
+          victoryGesture,
+          loveYouGesture,
+          pointLeftGesture,
+          pointRightGesture,
+          okayGesture
         ]);
 
         const gesture = await GE.estimate(hand[0].landmarks, 4);
@@ -64,8 +82,6 @@ function App() {
           );
 
           setEmoji(gesture.gestures[maxScore].name);
-
-          console.log(gesture.gestures[maxScore].name);
         }
       }
 
