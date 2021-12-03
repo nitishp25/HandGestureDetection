@@ -1,0 +1,47 @@
+.gestures {
+    .webcam {
+        border: 1px solid #000000;
+        box-shadow: 0 0 3px 1px #010101;
+        height: 480;
+        left: 0;
+        margin-top: 3px;
+        margin-left: auto;
+        margin-right: auto;
+        position: absolute;
+        right: 0;
+        text-align: center;
+        width: 640;
+        z-index: 9;
+    }
+
+    canvas {
+        height: 480;
+        left: 0;
+        margin-top: 3px;
+        margin-left: auto;
+        margin-right: auto;
+        position: absolute;
+        right: 0;
+        text-align: center;
+        width: 640;
+        z-index: 9;
+    }
+
+    .translation {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        .name {
+            margin-right: 3vw;
+            margin-top: 38.5vw;
+        }
+
+        .emoji {
+            height: 85px;
+            margin-top: 36vw;
+            width: 110px;
+        }
+    }
+}
