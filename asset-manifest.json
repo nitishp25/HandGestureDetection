@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/HandGestureDetection/static/css/main.907efa42.chunk.css",
-    "main.js": "/HandGestureDetection/static/js/main.e7a6fcea.chunk.js",
-    "main.js.map": "/HandGestureDetection/static/js/main.e7a6fcea.chunk.js.map",
+    "main.css": "/HandGestureDetection/static/css/main.5f949adf.chunk.css",
+    "main.js": "/HandGestureDetection/static/js/main.5b9ba5e6.chunk.js",
+    "main.js.map": "/HandGestureDetection/static/js/main.5b9ba5e6.chunk.js.map",
     "runtime-main.js": "/HandGestureDetection/static/js/runtime-main.f65a08f9.js",
     "runtime-main.js.map": "/HandGestureDetection/static/js/runtime-main.f65a08f9.js.map",
-    "static/js/2.b8831b4b.chunk.js": "/HandGestureDetection/static/js/2.b8831b4b.chunk.js",
-    "static/js/2.b8831b4b.chunk.js.map": "/HandGestureDetection/static/js/2.b8831b4b.chunk.js.map",
+    "static/js/2.a16722bc.chunk.js": "/HandGestureDetection/static/js/2.a16722bc.chunk.js",
+    "static/js/2.a16722bc.chunk.js.map": "/HandGestureDetection/static/js/2.a16722bc.chunk.js.map",
     "index.html": "/HandGestureDetection/index.html",
-    "static/css/main.907efa42.chunk.css.map": "/HandGestureDetection/static/css/main.907efa42.chunk.css.map",
-    "static/js/2.b8831b4b.chunk.js.LICENSE.txt": "/HandGestureDetection/static/js/2.b8831b4b.chunk.js.LICENSE.txt",
+    "static/css/main.5f949adf.chunk.css.map": "/HandGestureDetection/static/css/main.5f949adf.chunk.css.map",
+    "static/js/2.a16722bc.chunk.js.LICENSE.txt": "/HandGestureDetection/static/js/2.a16722bc.chunk.js.LICENSE.txt",
     "static/media/i_love_you.1d8373ac.png": "/HandGestureDetection/static/media/i_love_you.1d8373ac.png",
     "static/media/okay.fc04f169.png": "/HandGestureDetection/static/media/okay.fc04f169.png",
     "static/media/point_left.0eeb154c.png": "/HandGestureDetection/static/media/point_left.0eeb154c.png",
     "static/media/point_right.40d8a6a4.png": "/HandGestureDetection/static/media/point_right.40d8a6a4.png",
-    "static/media/thumbs_up.e3bf974d.png": "/HandGestureDetection/static/media/thumbs_up.e3bf974d.png",
-    "static/media/victory.8710fbb2.png": "/HandGestureDetection/static/media/victory.8710fbb2.png"
+    "static/media/thumbs_up.e52702e1.png": "/HandGestureDetection/static/media/thumbs_up.e52702e1.png",
+    "static/media/victory.8c16544e.png": "/HandGestureDetection/static/media/victory.8c16544e.png"
   },
   "entrypoints": [
     "static/js/runtime-main.f65a08f9.js",
-    "static/js/2.b8831b4b.chunk.js",
-    "static/css/main.907efa42.chunk.css",
-    "static/js/main.e7a6fcea.chunk.js"
+    "static/js/2.a16722bc.chunk.js",
+    "static/css/main.5f949adf.chunk.css",
+    "static/js/main.5b9ba5e6.chunk.js"
   ]
 }
