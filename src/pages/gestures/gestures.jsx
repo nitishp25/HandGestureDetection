@@ -7,18 +7,22 @@ import Webcam from "react-webcam";
 
 import { drawHand } from "./utilities";
 import { loveYouGesture } from './custom-gestures/LoveYou.js';
+import { okayGesture } from './custom-gestures/Okay.js';
 import { pointLeftGesture } from './custom-gestures/PointLeft.js';
 import { pointRightGesture } from './custom-gestures/PointRight.js';
-import { okayGesture } from './custom-gestures/Okay.js';
-import { victoryGesture } from "./custom-gestures/Victory.js";
+import { stopGesture } from './custom-gestures/Stop.js';
 import { thumbsUpGesture } from "./custom-gestures/ThumbsUp.js";
+import { thumbsDownGesture } from "./custom-gestures/ThumbsDown.js";
+import { victoryGesture } from "./custom-gestures/Victory.js";
 
-import victory from "./images/victory.png";
-import thumbs_up from "./images/thumbs_up.png";
 import i_love_you from "./images/i_love_you.png";
+import okay from "./images/okay.png";
 import point_left from "./images/point_left.png";
 import point_right from "./images/point_right.png";
-import okay from "./images/okay.png";
+import stop from "./images/stop.png";
+import thumbs_up from "./images/thumbs_up.png";
+import thumbs_down from "./images/thumbs_down.png";
+import victory from "./images/victory.png";
 
 import "./gestures.styles.scss";
 
@@ -27,29 +31,34 @@ const Gestures = () => {
   const canvasRef = useRef(null);
 
   const [emoji, setEmoji] = useState(null);
+
   const images = { 
-    thumbs_up: thumbs_up, 
-    victory: victory, 
     i_love_you: i_love_you, 
+    okay: okay,
     point_left: point_left,
     point_right: point_right,
-    okay: okay 
+    stop: stop,
+    thumbs_up: thumbs_up, 
+    thumbs_down: thumbs_down, 
+    victory: victory
   };
 
   const names = { 
-    thumbs_up: "THUMBS UP", 
-    victory: "VICTORY", 
     i_love_you: "I LOVE YOU", 
+    okay: "OKAY", 
     point_left: "POINT LEFT",
     point_right: "POINT RIGHT",
-    okay: "OKAY" 
+    stop: "STOP",
+    thumbs_up: "THUMBS UP", 
+    thumbs_down: "THUMBS DOWN", 
+    victory: "VICTORY"
   };
 
   const runHandpose = async () => {
     const net = await handpose.load();
     setInterval(() => {
       detect(net);
-    }, 10);
+    }, 1);
   };
 
   const detect = async (net) => {
@@ -72,12 +81,14 @@ const Gestures = () => {
 
       if (hand.length > 0) {
         const GE = new fp.GestureEstimator([
-          thumbsUpGesture,
-          victoryGesture,
           loveYouGesture,
+          okayGesture,
           pointLeftGesture,
           pointRightGesture,
-          okayGesture
+          stopGesture,
+          thumbsUpGesture,
+          thumbsDownGesture,
+          victoryGesture,
         ]);
 
         const gesture = await GE.estimate(hand[0].landmarks, 4);
@@ -114,7 +125,7 @@ const Gestures = () => {
           <div className="translation">
             <h3 className="name">{names[emoji]}</h3> 
 
-            <img src={images[emoji]} className="emoji" />
+            <img src={images[emoji]} alt="emojis" className="emoji" />
           </div>
           ) : ( ""
         )}
