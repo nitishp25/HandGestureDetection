@@ -8,21 +8,27 @@ import Webcam from "react-webcam";
 import { drawHand } from "./utilities";
 import { loveYouGesture } from './custom-gestures/LoveYou.js';
 import { okayGesture } from './custom-gestures/Okay.js';
+import { pointDownGesture } from './custom-gestures/PointDown.js';
 import { pointLeftGesture } from './custom-gestures/PointLeft.js';
 import { pointRightGesture } from './custom-gestures/PointRight.js';
+import { pointUpGesture } from './custom-gestures/PointUp.js';
 import { stopGesture } from './custom-gestures/Stop.js';
 import { thumbsUpGesture } from "./custom-gestures/ThumbsUp.js";
 import { thumbsDownGesture } from "./custom-gestures/ThumbsDown.js";
 import { victoryGesture } from "./custom-gestures/Victory.js";
+import { yesGesture } from './custom-gestures/Yes.js';
 
 import i_love_you from "./images/i_love_you.png";
 import okay from "./images/okay.png";
+import point_down from "./images/point_down.png";
 import point_left from "./images/point_left.png";
 import point_right from "./images/point_right.png";
+import point_up from "./images/point_up.png";
 import stop from "./images/stop.png";
 import thumbs_up from "./images/thumbs_up.png";
 import thumbs_down from "./images/thumbs_down.png";
 import victory from "./images/victory.png";
+import yes from "./images/yes.png";
 
 import "./gestures.styles.scss";
 
@@ -35,23 +41,29 @@ const Gestures = () => {
   const images = { 
     i_love_you: i_love_you, 
     okay: okay,
+    point_down: point_down,
     point_left: point_left,
     point_right: point_right,
+    point_up: point_up,
     stop: stop,
     thumbs_up: thumbs_up, 
     thumbs_down: thumbs_down, 
-    victory: victory
+    victory: victory,
+    yes: yes
   };
 
   const names = { 
     i_love_you: "I LOVE YOU", 
     okay: "OKAY", 
+    point_down: "POINT DOWN",
     point_left: "POINT LEFT",
     point_right: "POINT RIGHT",
+    point_up: "POINT UP",
     stop: "STOP",
     thumbs_up: "THUMBS UP", 
     thumbs_down: "THUMBS DOWN", 
-    victory: "VICTORY"
+    victory: "VICTORY",
+    yes: "YES"
   };
 
   const runHandpose = async () => {
@@ -83,12 +95,15 @@ const Gestures = () => {
         const GE = new fp.GestureEstimator([
           loveYouGesture,
           okayGesture,
+          pointDownGesture,
           pointLeftGesture,
           pointRightGesture,
+          pointUpGesture,
           stopGesture,
           thumbsUpGesture,
           thumbsDownGesture,
           victoryGesture,
+          yesGesture
         ]);
 
         const gesture = await GE.estimate(hand[0].landmarks, 4);
